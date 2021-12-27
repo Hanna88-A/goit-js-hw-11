@@ -38,6 +38,16 @@ function onFormSubmit(e) {
     refs.loadMoreBtn.classList.remove('visually-hidden')
     galleryImageService.incrementPage()
     renderImages(hits)
+
+    const { height: cardHeight } = document
+      .querySelector(".gallery")
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: "smooth",
+    });
+
     lightbox.refresh()
   });
   
@@ -55,6 +65,17 @@ function onLoadMore() {
       }
     galleryImageService.incrementPage()
     renderImages(hits)
+
+    const { height: cardHeight } = document
+      .querySelector(".gallery")
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: "smooth",
+    });
+
+
     lightbox.refresh()
   });
 }
@@ -68,7 +89,7 @@ function renderImages(el) {
      
      return `<a class="gallery-item" href=${hit.largeImageURL}>
     <div class="photo-card">
-    <div class="amage-box">
+    <div class="image-box">
     <img class="gallery-image" src=${hit.webformatURL} alt=${hit.tags}  loading="lazy" />
     </div>
     <div class="info">
@@ -97,7 +118,6 @@ function renderImages(el) {
 function clearImages() {
   refs.cardsImages.innerHTML = ''
 }
-
 
 
 
